@@ -1,0 +1,117 @@
+[데이터베이스 명령어 - mysql]
+* SHOW : 생성된 데이터베이스 목록이나 테이블 목록을 볼 때 사용됨.
+ ex) 	
+	SHOW DATABASES;
+	SHOW TABLES;
+* USE : 데이터베이스 중 하나를 선택해서 입장하는 명령어.
+ ex)	
+	USE JAVA
+-------------------------------------------------------------------------
+[DDL : 데이터 정의어]
+* CREATE : 데이터베이스 또는 테이블 생성
+ ex)
+	CREATE DATABASE JAVA;
+	CREATE TABLE BOOKS(
+		BOOK_NUM INT AUTO_INCREMENT PRIMARY KEY,
+		TITLE VARCHAR(50),
+		PUBLISHER VARCHAR(50),
+		PRICE INT
+	);
+		
+	
+* DROP : 데이터베이스 또는 테이블 삭제
+ ex)
+	DROP TABLE BOOKS;
+	DROP DATABASE JAVA;
+
+* ALTER : 테이블 칼럼 추가, 삭제, 칼럼 자료형 변경
+ ex)
+	ALTER TABLE BOOKS ADD YEAR CHAR(4);
+-------------------------------------------------------------------------
+[DML : 데이터 조작어]
+*INSERT INTO 테이블명 (칼럼들) VALUES(값들)
+ ex)
+	INSERT INTO BOOKS(YEAR,PRICE,TITLE,PUBLISHER,BOOK_NUM)
+		VALUES('2017', 30000, 'POWER JAVA', 'SDS', 100);
+	INSERT INTO BOOKS(YEAR, PRICE, TITLE, PUBLISHER)
+		VALUES('2017', 20000, 'ORACLE', 'SDS');
+	INSERT INTO BOOKS
+		VALUES(1000, 'JSP', 'KAME', 25000, '2015');
+	INSERT INTO BOOKS
+		VALUES(10, 'Java의 정석', '길벗', 23000, '2015');
+
+
+*SELECT 칼럼명들 FROM 테이블명 [WHERE 조건, ORDER BY 정렬기준칼럼]
+ ex)
+	SELECT TITLE,PRICE FROM BOOKS;
+	SELECT * FROM BOOKS WHERE PRICE<=25000;
+	SELECT * FROM BOOKS 
+		WHERE PRICE<30000 AND PRICE>=20000;
+	SELECT * FROM BOOKS 
+		WHERE PRICE<30000 AND PRICE>=20000 ORDER BY PRICE ASC;
+	SELECT * FROM BOOKS 
+		WHERE PRICE<30000 AND PRICE>=20000 ORDER BY PRICE DESC;		
+	SELECT * FROM BOOKS
+		WHERE TITLE LIKE 'J%';
+	SELECT * FROM BOOKS
+		WHERE TITLE LIKE '%R%';
+	SELECT * FROM BOOKS
+		WHERE TITLE LIKE 'J__';
+
+
+*UPDATE 테이블명 SET 칼럼1=새값1, 칼럼2=새값2,... [WHERE 조건]
+ ex) 
+	UPDATE BOOKS SET PRICE=10000; // 모든 레코드 대상으로 ???
+	UPDATE BOOKS SET PRICE=PRICE+5000 
+		WHERE BOOK_NUM=13;
+	
+*DELETE FROM 테이블명 [WHERE 조건]
+ ex)
+	DELETE FROM BOOKS; // 모든 레코드 삭제
+	DELETE FROM BOOKS WHERE BOOK_NUM=13;
+	DELETE FROM BOOKS WHERE BOOK_NUM=13 OR BOOK_NUM=15;
+	DELETE FROM BOOKS WHERE TITLE='POWER JAVA';
+-----------------------------------------------------------------------
+[준비작업]
+드라이버 파일 다운로드 받아서 작업할 프로젝트에 포함시키기
+프로젝트에서 우클릭 -> Build path -> Configure build path ->
+ libraries 탭 -> Add jar -> 저장한 경로의 jar 파일 선택 -> ok
+-----------------------------------------------------------------------
+[자바 데이터베이스 코딩 매뉴얼]
+
+1. 드라이버 로딩
+2. 커넥션 생성
+3. SQL 작성
+4. Statement 또는 PreparedStatement 객체
+5. SQL 실행
+ 5.1 명령이 insert, update, delete 인 경우
+ 5.2 명령이 select 인 경우
+6. 결과값 처리
+7. 사용한 자원 반납 close
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
